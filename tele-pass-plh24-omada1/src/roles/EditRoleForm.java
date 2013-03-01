@@ -61,6 +61,7 @@ public class EditRoleForm extends javax.swing.JFrame {
         roleBoxRenderer1.setText("roleBoxRenderer1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Επεξεργασία Ρόλου");
 
         jLabel1.setText("Όνομα Ρόλου : ");
 
@@ -86,7 +87,7 @@ public class EditRoleForm extends javax.swing.JFrame {
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, list1, jTable1);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${canCreate}"));
         columnBinding.setColumnName("Can Create");
-        columnBinding.setColumnClass(java.io.Serializable.class);
+        columnBinding.setColumnClass(Boolean.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${canDelete}"));
         columnBinding.setColumnName("Can Delete");
         columnBinding.setColumnClass(java.io.Serializable.class);
@@ -110,7 +111,6 @@ public class EditRoleForm extends javax.swing.JFrame {
         columnBinding.setColumnClass(java.io.Serializable.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
-
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -153,6 +153,8 @@ public class EditRoleForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        getAccessibleContext().setAccessibleParent(this);
+
         bindingGroup.bind();
 
         pack();
@@ -164,7 +166,7 @@ public class EditRoleForm extends javax.swing.JFrame {
         for (WindowListener l : this.getWindowListeners()) {
             l.windowClosed(we);
        }
-       this.setVisible(false); 
+     this.setVisible(false); 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -173,7 +175,7 @@ public class EditRoleForm extends javax.swing.JFrame {
         for (WindowListener l : this.getWindowListeners()) {
             l.windowClosed(we);
        }
-       this.setVisible(false); 
+      this.setVisible(false); 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

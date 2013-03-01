@@ -5,6 +5,7 @@
 package customers;
 
 import avenue.MyWindowEvent;
+import java.awt.Component;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
@@ -20,6 +21,11 @@ import model.Vehicle;
  */
 public class EditClientForm extends javax.swing.JFrame {
 
+
+   @Override
+    public void setLocationRelativeTo(Component c) {
+        super.setLocationRelativeTo(c);
+    }
     public EditClientForm() {
         em = DBManager.em;
         if ( !(em.getTransaction().isActive()) ){
@@ -287,7 +293,7 @@ public class EditClientForm extends javax.swing.JFrame {
        
        vf.setVisible(true);
        thisFrame=this;
-       thisFrame.setEnabled(false);
+      thisFrame.setEnabled(false);
        //************
         vf.addWindowListener(new WindowListener() {
             public void windowClosed(WindowEvent arg0) {

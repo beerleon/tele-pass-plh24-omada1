@@ -8,7 +8,7 @@ package tolls;
  *
  * @author Aggelos
  */
-public class PaymentForm extends javax.swing.JFrame {
+public class PaymentForm extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form PaymentForm

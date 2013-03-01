@@ -50,8 +50,6 @@ public class ListRolesForm extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit1.png"))); // NOI18N
         jButton3.setText("Επεξεργασία");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +116,7 @@ public class ListRolesForm extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         bindingGroup.bind();
@@ -202,8 +200,8 @@ public class ListRolesForm extends javax.swing.JFrame {
             em.persist(ur);
             EditRoleForm erf = new EditRoleForm(ur,false);
             erf.setVisible(true);
-            thisFrame=this;
-            thisFrame.setEnabled(false);
+           // thisFrame=this;
+           // thisFrame.setEnabled(false);
         
        
        //************

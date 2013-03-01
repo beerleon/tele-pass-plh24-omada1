@@ -5,6 +5,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -31,6 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "UserRole.findById", query = "SELECT u FROM UserRole u WHERE u.id = :id"),
     @NamedQuery(name = "UserRole.findByRoleName", query = "SELECT u FROM UserRole u WHERE u.roleName = :roleName")})
 public class UserRole implements Serializable {
+    @OneToMany(mappedBy = "roleId")
+    private Collection<RolePermission> rolePermissionCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -108,6 +111,15 @@ public class UserRole implements Serializable {
     @Override
     public String toString() {
         return "model.UserRole[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<RolePermission> getRolePermissionCollection() {
+        return rolePermissionCollection;
+    }
+
+    public void setRolePermissionCollection(Collection<RolePermission> rolePermissionCollection) {
+        this.rolePermissionCollection = rolePermissionCollection;
     }
     
 }

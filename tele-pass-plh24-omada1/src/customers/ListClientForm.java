@@ -16,7 +16,7 @@ import model.DBManager;
  *
  * @author Aggelos
  */
-public class ListClientForm extends javax.swing.JFrame {
+public class ListClientForm extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form ListClientForm
@@ -50,7 +50,12 @@ public class ListClientForm extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Λίστα Πελατών");
+        try {
+            setSelected(true);
+        } catch (java.beans.PropertyVetoException e1) {
+            e1.printStackTrace();
+        }
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, list1, jTable1);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${FName}"));
@@ -185,8 +190,8 @@ public class ListClientForm extends javax.swing.JFrame {
        EditClientForm ecf = new EditClientForm(c,false);
        
        ecf.setVisible(true);
-       thisFrame=this;
-       thisFrame.setEnabled(false);
+       //thisFrame=this;
+       //thisFrame.setEnabled(false);
        //************
         ecf.addWindowListener(new WindowListener() {
             public void windowClosed(WindowEvent arg0) {
@@ -247,8 +252,8 @@ public class ListClientForm extends javax.swing.JFrame {
        EditClientForm ecf = new EditClientForm(c,true);
        
        ecf.setVisible(true);
-       thisFrame=this;
-       thisFrame.setEnabled(false);
+       //thisFrame=this;
+      // thisFrame.setEnabled(false);
        //************
         ecf.addWindowListener(new WindowListener() {
             public void windowClosed(WindowEvent arg0) {

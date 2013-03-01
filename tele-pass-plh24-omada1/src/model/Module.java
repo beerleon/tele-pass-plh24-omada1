@@ -5,6 +5,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -30,6 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Module.findById", query = "SELECT m FROM Module m WHERE m.id = :id"),
     @NamedQuery(name = "Module.findByDescription", query = "SELECT m FROM Module m WHERE m.description = :description")})
 public class Module implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "moduleId")
+    private Collection<RolePermission> rolePermissionCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -101,6 +104,15 @@ public class Module implements Serializable {
     @Override
     public String toString() {
         return "model.Module[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<RolePermission> getRolePermissionCollection() {
+        return rolePermissionCollection;
+    }
+
+    public void setRolePermissionCollection(Collection<RolePermission> rolePermissionCollection) {
+        this.rolePermissionCollection = rolePermissionCollection;
     }
     
 }

@@ -4,6 +4,7 @@
  */
 package users;
 
+import avenue.Avenue;
 import avenue.MyWindowEvent;
 import avenue.Session;
 import java.awt.event.WindowEvent;
@@ -17,7 +18,7 @@ import model.DBManager;
  *
  * @author Aggelos
  */
-public class ListUsersForm extends javax.swing.JFrame {
+public class ListUsersForm extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form ListUsersForm
@@ -28,8 +29,10 @@ public class ListUsersForm extends javax.swing.JFrame {
             em.getTransaction().begin();
         }
         initComponents();
+           
     }
-
+      
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,40 +45,51 @@ public class ListUsersForm extends javax.swing.JFrame {
 
         query1 = em.createQuery("select au from AppUser au where au.stationId=:station").setParameter("station",Session.loginUser.getStationId());
         list1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(query1.getResultList());
-        jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        ButtonNew = new javax.swing.JButton();
+        ButtonDelete = new javax.swing.JButton();
+        ButtonEdit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TableUsersList = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setClosable(true);
+        setMaximizable(true);
+        setTitle("Λίστα Χρηστών");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/images/UsersListForm.jpg"))); // NOI18N
+        setName(""); // NOI18N
+        try {
+            setSelected(true);
+        } catch (java.beans.PropertyVetoException e1) {
+            e1.printStackTrace();
+        }
+        setVerifyInputWhenFocusTarget(false);
+        setVisible(true);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit1.png"))); // NOI18N
-        jButton3.setText("Επεξεργασία");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        ButtonNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit1.png"))); // NOI18N
+        ButtonNew.setText("Επεξεργασία");
+        ButtonNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                ButtonNewActionPerformed(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/remove.gif"))); // NOI18N
-        jButton2.setText("Διαγραφή");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        ButtonDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/remove.gif"))); // NOI18N
+        ButtonDelete.setText("Διαγραφή");
+        ButtonDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                ButtonDeleteActionPerformed(evt);
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.gif"))); // NOI18N
-        jButton1.setText("Νέος");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ButtonEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.gif"))); // NOI18N
+        ButtonEdit.setText("Νέος");
+        ButtonEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ButtonEditActionPerformed(evt);
             }
         });
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, list1, jTable1);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, list1, TableUsersList);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${FName}"));
         columnBinding.setColumnName("FName");
         columnBinding.setColumnClass(String.class);
@@ -117,7 +131,7 @@ public class ListUsersForm extends javax.swing.JFrame {
         columnBinding.setColumnClass(Integer.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(TableUsersList);
 
         jLabel1.setText("Χρήστες");
 
@@ -133,11 +147,11 @@ public class ListUsersForm extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(ButtonEdit)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2)
+                                .addComponent(ButtonDelete)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3)))
+                                .addComponent(ButtonNew)))
                         .addGap(0, 497, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -150,10 +164,10 @@ public class ListUsersForm extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addContainerGap(108, Short.MAX_VALUE))
+                    .addComponent(ButtonEdit)
+                    .addComponent(ButtonDelete)
+                    .addComponent(ButtonNew))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
         bindingGroup.bind();
@@ -161,15 +175,15 @@ public class ListUsersForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ButtonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEditActionPerformed
         // TODO add your handling code here:
        u = new AppUser();
        em.persist(u);
        EditUserForm euf = new EditUserForm(u,false);
        
        euf.setVisible(true);
-       thisFrame=this;
-       thisFrame.setEnabled(false);
+       //thisFrame=this;
+      // thisFrame.setEnabled(false);
        //************
         euf.addWindowListener(new WindowListener() {
             public void windowClosed(WindowEvent arg0) {
@@ -180,8 +194,8 @@ public class ListUsersForm extends javax.swing.JFrame {
                     list1.add(u);
                     int row = list1.size() - 1;
         
-                    jTable1.setRowSelectionInterval(row, row);
-                    jTable1.scrollRectToVisible(jTable1.getCellRect(row, 0, true));
+                    TableUsersList.setRowSelectionInterval(row, row);
+                    TableUsersList.scrollRectToVisible(TableUsersList.getCellRect(row, 0, true));
                     thisFrame.setEnabled(true);
                 }
                 else{
@@ -215,31 +229,31 @@ public class ListUsersForm extends javax.swing.JFrame {
                 System.out.println("Window Opened");
             }
         });
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_ButtonEditActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void ButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonDeleteActionPerformed
         // TODO add your handling code here:
-        int s=jTable1.getSelectedRow();
+        int s=TableUsersList.getSelectedRow();
         if (s>=0) {
-            AppUser u = list1.get(jTable1.convertRowIndexToModel(s));
+            AppUser u = list1.get(TableUsersList.convertRowIndexToModel(s));
             list1.remove(u);
             em.remove(u);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_ButtonDeleteActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void ButtonNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonNewActionPerformed
         // TODO add your handling code here:
-        s=jTable1.getSelectedRow();
+        s=TableUsersList.getSelectedRow();
         
         if (s>=0) {
-            u = list1.get(jTable1.convertRowIndexToModel(s));
+            u = list1.get(TableUsersList.convertRowIndexToModel(s));
             EditUserForm euf = new EditUserForm(u,false);
             
             em.persist(u);
             
             euf.setVisible(true);
-            thisFrame=this;
-            thisFrame.setEnabled(false);
+           // thisFrame=this;
+            //thisFrame.setEnabled(false);
         
        
        //************
@@ -249,8 +263,8 @@ public class ListUsersForm extends javax.swing.JFrame {
                if (((MyWindowEvent)arg0).exitAndSave){
                     
                     
-                    jTable1.setRowSelectionInterval(s, s);
-                    jTable1.scrollRectToVisible(jTable1.getCellRect(s, 0, true));
+                    TableUsersList.setRowSelectionInterval(s, s);
+                    TableUsersList.scrollRectToVisible(TableUsersList.getCellRect(s, 0, true));
                     thisFrame.setEnabled(true);
                 }
                 else{
@@ -285,7 +299,7 @@ public class ListUsersForm extends javax.swing.JFrame {
             }
         });
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_ButtonNewActionPerformed
 
     /**
      * @param args the command line arguments
@@ -322,12 +336,12 @@ public class ListUsersForm extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton ButtonDelete;
+    private javax.swing.JButton ButtonEdit;
+    private javax.swing.JButton ButtonNew;
+    private javax.swing.JTable TableUsersList;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private java.util.List<AppUser> list1;
     private javax.persistence.Query query1;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;

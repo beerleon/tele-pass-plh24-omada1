@@ -5,6 +5,7 @@
 package avenue;
 
 import customers.ListClientForm;
+import java.awt.Toolkit;
 import javax.swing.JMenuItem;
 import program.ListProgramForm;
 import roles.ListRolesForm;
@@ -16,16 +17,23 @@ import users.ListUsersForm;
  *
  * @author Aggelos
  */
-public class Avenue extends javax.swing.JFrame {
 
-    /**
+public class Avenue extends javax.swing.JFrame {
+       
+      /**
      * Creates new form Avenue
      */
+   
     public Avenue() {
-        LoginForm lf = new LoginForm(this);
-        lf.setVisible(true);
+     
+        LoginForm formLogin = new LoginForm(this);
+        formLogin.setLocationRelativeTo(null); // Κεντράρισμα της LoginForm στο κέντρο της οθόνης
+        formLogin.setVisible(true); // Εμφάνιση LoginForm
+        this.setExtendedState(MAXIMIZED_BOTH);  //Μεγιστοποίηση της Κεντρικής Φόρμας 
+        this.setTitle("Αυτόματο Σύστημα Διαχείρισης Διοδίων TELE-PASS"); // Γραμμή Τίτλου στην Κεντρική Φόρμα
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("images/e-pass.jpg")));// Εικονίδιο Ελέγχου στην Κεντρική Φόρμα
         initComponents();
-    }
+         }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,97 +43,116 @@ public class Avenue extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        jPanel1 = new javax.swing.JPanel();
+        LoginUser = Session.loginUser;
+        PanelFooter = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        TextFieldStation = new javax.swing.JTextField();
+        TextFieldUsername = new javax.swing.JTextField();
+        desktop = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
+        MenuItemUsers = new javax.swing.JMenuItem();
+        MenuItemCustomers = new javax.swing.JMenuItem();
+        MenuItemRoles = new javax.swing.JMenuItem();
+        MenuItemPrograms = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        MenuItemExitApplication = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        MenuItemTileHorizontally = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        PanelFooter.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         jLabel1.setText("Σταθμός: ");
 
-        jTextField1.setEditable(false);
-        jTextField1.setText("jTextField1");
-
         jLabel2.setText("Χρήστης: ");
 
-        jTextField2.setEditable(false);
-        jTextField2.setText("jTextField2");
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, LoginUser, org.jdesktop.beansbinding.ELProperty.create("${stationId.description}"), TextFieldStation, org.jdesktop.beansbinding.BeanProperty.create("text"), "");
+        bindingGroup.addBinding(binding);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, LoginUser, org.jdesktop.beansbinding.ELProperty.create("${userName}"), TextFieldUsername, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        javax.swing.GroupLayout PanelFooterLayout = new javax.swing.GroupLayout(PanelFooter);
+        PanelFooter.setLayout(PanelFooterLayout);
+        PanelFooterLayout.setHorizontalGroup(
+            PanelFooterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelFooterLayout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 562, Short.MAX_VALUE)
+                .addComponent(TextFieldStation, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 521, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TextFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        PanelFooterLayout.setVerticalGroup(
+            PanelFooterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelFooterLayout.createSequentialGroup()
                 .addGap(0, 11, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(PanelFooterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(TextFieldStation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2))
         );
 
         jMenu1.setText("Διαχείριση");
 
-        jMenuItem3.setText("Χρήστες");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        MenuItemUsers.setText("Χρήστες");
+        MenuItemUsers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                MenuItemUsersActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
+        jMenu1.add(MenuItemUsers);
 
-        jMenuItem1.setText("Πελάτες");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        MenuItemCustomers.setText("Πελάτες");
+        MenuItemCustomers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                MenuItemCustomersActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(MenuItemCustomers);
 
-        jMenuItem7.setText("Ρόλοι");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        MenuItemRoles.setText("Ρόλοι");
+        MenuItemRoles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                MenuItemRolesActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem7);
+        jMenu1.add(MenuItemRoles);
 
-        jMenuItem8.setText("Προγράμματα");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+        MenuItemPrograms.setText("Προγράμματα");
+        MenuItemPrograms.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
+                MenuItemProgramsActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem8);
+        jMenu1.add(MenuItemPrograms);
+        jMenu1.add(jSeparator1);
+
+        MenuItemExitApplication.setText("Έξοδος");
+        MenuItemExitApplication.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemExitApplicationActionPerformed(evt);
+            }
+        });
+        jMenu1.add(MenuItemExitApplication);
 
         jMenuBar1.add(jMenu1);
 
@@ -159,59 +186,108 @@ public class Avenue extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
+        jMenu2.setText("Παράθυρο");
+
+        jMenuItem9.setText("Σε Επικάλυψη");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem9);
+
+        jMenuItem10.setText("Κατακόρυφα");
+        jMenu2.add(jMenuItem10);
+
+        MenuItemTileHorizontally.setText("Οριζόντια");
+        MenuItemTileHorizontally.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemTileHorizontallyActionPerformed(evt);
+            }
+        });
+        jMenu2.add(MenuItemTileHorizontally);
+
+        jMenuBar1.add(jMenu2);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelFooter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(desktop, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 239, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PanelFooter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
-        PaymentForm pf = new PaymentForm();
-        pf.setVisible(true);
+        PaymentForm formPayment = new PaymentForm();
+        formPayment.setVisible(true);
+        desktop.add(formPayment);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void MenuItemCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemCustomersActionPerformed
         // TODO add your handling code here:
-        ListClientForm lcf = new ListClientForm();
-        lcf.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+        ListClientForm formClientList = new ListClientForm();
+        formClientList.setVisible(true);
+        desktop.add(formClientList);//Προσθήκη της φόρμας σαν Child στο MDI Avenue
+    }//GEN-LAST:event_MenuItemCustomersActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void MenuItemUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemUsersActionPerformed
         // TODO add your handling code here:
-        ListUsersForm luf = new ListUsersForm();
-        luf.setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+        ListUsersForm formUserList = new ListUsersForm();
+        formUserList.setVisible(true);
+        desktop.add(formUserList);
+        
+    }//GEN-LAST:event_MenuItemUsersActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+    private void MenuItemRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemRolesActionPerformed
         // TODO add your handling code here:
-        ListRolesForm lrf = new ListRolesForm();
-        lrf.setVisible(true);
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+        ListRolesForm formRoleList = new ListRolesForm();
+        formRoleList.setVisible(true);
+        desktop.add(formRoleList);
+    }//GEN-LAST:event_MenuItemRolesActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
         CollectTollForm ctf = new CollectTollForm();
         ctf.setVisible(true);
+        desktop.add(ctf);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+    private void MenuItemProgramsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemProgramsActionPerformed
         // TODO add your handling code here:
         ListProgramForm lpf = new ListProgramForm();
         lpf.setVisible(true);
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
+        desktop.add(lpf);
+    }//GEN-LAST:event_MenuItemProgramsActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        // TODO add your handling code here:,
+
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void MenuItemExitApplicationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemExitApplicationActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_MenuItemExitApplicationActionPerformed
+
+    private void MenuItemTileHorizontallyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemTileHorizontallyActionPerformed
+      
+        desktop.getAutoscrolls();
+    }//GEN-LAST:event_MenuItemTileHorizontallyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,50 +305,55 @@ public class Avenue extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Avenue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Avenue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Avenue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Avenue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+     
         }
         //</editor-fold>
 
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Avenue().setVisible(true);
-            }
+                  public void run() {
+               new Avenue().setVisible(false);
+                            }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private model.AppUser LoginUser;
+    private javax.swing.JMenuItem MenuItemCustomers;
+    private javax.swing.JMenuItem MenuItemExitApplication;
+    private javax.swing.JMenuItem MenuItemPrograms;
+    private javax.swing.JMenuItem MenuItemRoles;
+    private javax.swing.JMenuItem MenuItemTileHorizontally;
+    private javax.swing.JMenuItem MenuItemUsers;
+    private javax.swing.JPanel PanelFooter;
+    private javax.swing.JTextField TextFieldStation;
+    private javax.swing.JTextField TextFieldUsername;
+    private javax.swing.JDesktopPane desktop;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
     public JMenuItem getjMenuItem1() {
-        return jMenuItem1;
+        return MenuItemCustomers;
     }
 
     public void setjMenuItem1(JMenuItem jMenuItem1) {
-        this.jMenuItem1 = jMenuItem1;
+        this.MenuItemCustomers = jMenuItem1;
     }
 
     public JMenuItem getjMenuItem2() {
@@ -284,11 +365,11 @@ public class Avenue extends javax.swing.JFrame {
     }
 
     public JMenuItem getjMenuItem3() {
-        return jMenuItem3;
+        return MenuItemUsers;
     }
 
     public void setjMenuItem3(JMenuItem jMenuItem3) {
-        this.jMenuItem3 = jMenuItem3;
+        this.MenuItemUsers = jMenuItem3;
     }
 
     public JMenuItem getjMenuItem4() {
@@ -316,19 +397,19 @@ public class Avenue extends javax.swing.JFrame {
     }
 
     public JMenuItem getjMenuItem7() {
-        return jMenuItem7;
+        return MenuItemRoles;
     }
 
     public void setjMenuItem7(JMenuItem jMenuItem7) {
-        this.jMenuItem7 = jMenuItem7;
+        this.MenuItemRoles = jMenuItem7;
     }
 
     public JMenuItem getjMenuItem8() {
-        return jMenuItem8;
+        return MenuItemPrograms;
     }
 
     public void setjMenuItem8(JMenuItem jMenuItem8) {
-        this.jMenuItem8 = jMenuItem8;
+        this.MenuItemPrograms = jMenuItem8;
     }
 
     
