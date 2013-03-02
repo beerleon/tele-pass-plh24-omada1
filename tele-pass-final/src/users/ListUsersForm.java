@@ -50,6 +50,7 @@ public class ListUsersForm extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TableUsersList = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setMaximizable(true);
@@ -134,6 +135,8 @@ public class ListUsersForm extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Χρήστες");
 
+        jButton1.setText("jButton1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,9 +151,12 @@ public class ListUsersForm extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(ButtonEdit)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ButtonDelete)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ButtonNew)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(ButtonDelete)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(ButtonNew)))))
                         .addGap(0, 497, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -166,7 +172,9 @@ public class ListUsersForm extends javax.swing.JInternalFrame {
                     .addComponent(ButtonEdit)
                     .addComponent(ButtonDelete)
                     .addComponent(ButtonNew))
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(45, 45, 45))
         );
 
         bindingGroup.bind();
@@ -306,6 +314,7 @@ public class ListUsersForm extends javax.swing.JInternalFrame {
     private javax.swing.JButton ButtonEdit;
     private javax.swing.JButton ButtonNew;
     private javax.swing.JTable TableUsersList;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private java.util.List<AppUser> list1;
