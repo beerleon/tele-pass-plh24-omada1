@@ -19,7 +19,7 @@ import users.ListUsersForm;
 
 /**
  *
- * @author Denis......
+ * @author Denis...*/
 
 public class Avenue extends javax.swing.JFrame {
      /**
@@ -36,7 +36,6 @@ public class Avenue extends javax.swing.JFrame {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("images/e-pass.jpg")));// Εικονίδιο Ελέγχου στην Κεντρική Φόρμα
         initComponents();
          }
-
       /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
