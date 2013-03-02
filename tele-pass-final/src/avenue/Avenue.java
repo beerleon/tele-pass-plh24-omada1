@@ -4,8 +4,10 @@ package avenue;
 import customers.ListClientForm;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.beans.PropertyVetoException;
 import javax.swing.JInternalFrame;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import program.ListProgramForm;
 import roles.ListRolesForm;
 import tolls.CollectTollForm;
@@ -246,7 +248,21 @@ public class Avenue extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+//
+//       public static void OpenForm(JDesktopPane desktop,JInternalFrame frm)
+//    {
+//        for (JInternalFrame f : desktop.getAllFrames()) {
+//            if (f.getTitle() == null ? frm.getTitle() == null : f.getTitle().equals(frm.getTitle())) {
+//                try {
+//                    f.setSelected(true);
+//                } catch (PropertyVetoException ex) {
+//                    Logger.getLogger(Avenue.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                return;
+//            }
+//        }
+//    }
+    
     private void MenuItemTollsPaymentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemTollsPaymentsActionPerformed
         // TODO add your handling code here:
         PaymentForm formPayment = new PaymentForm();
@@ -263,9 +279,19 @@ public class Avenue extends javax.swing.JFrame {
 
     private void MenuItemUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemUsersActionPerformed
         // TODO add your handling code here:
-         ListUsersForm formUserList = new ListUsersForm();
+        ListUsersForm formUserList = new ListUsersForm();
         formUserList.setVisible(true);
         desktop.add(formUserList);
+        try {
+            formUserList.setMaximum(true);  
+        }
+        catch(PropertyVetoException ex) {
+            String message;
+            message=ex.toString();
+              JOptionPane.showMessageDialog(this,  message,"Σφάλμα Μεγιστοποίησης",JOptionPane.ERROR_MESSAGE);       
+        }
+            
+      
                          
     }//GEN-LAST:event_MenuItemUsersActionPerformed
 
@@ -305,7 +331,8 @@ public class Avenue extends javax.swing.JFrame {
 
         final Dimension dim = desktop.getSize();
       
-
+  
+        
         switch (WindowLayout) {
             case TILE_HORIZONTAL: {
                 int vertSize = dim.height / frames.length;
