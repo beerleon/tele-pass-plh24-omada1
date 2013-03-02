@@ -49,8 +49,9 @@ public class ListUsersForm extends javax.swing.JInternalFrame {
         ButtonEdit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TableUsersList = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        LabelUsers = new javax.swing.JLabel();
+        ButtonCancel = new javax.swing.JButton();
+        ButtonSave = new javax.swing.JButton();
 
         setClosable(true);
         setMaximizable(true);
@@ -133,9 +134,23 @@ public class ListUsersForm extends javax.swing.JInternalFrame {
         jTableBinding.bind();
         jScrollPane1.setViewportView(TableUsersList);
 
-        jLabel1.setText("Χρήστες");
+        LabelUsers.setText("Χρήστες");
 
-        jButton1.setText("jButton1");
+        ButtonCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel.gif"))); // NOI18N
+        ButtonCancel.setText("Ακυρο");
+        ButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonCancelActionPerformed(evt);
+            }
+        });
+
+        ButtonSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.gif"))); // NOI18N
+        ButtonSave.setText("Αποθήκευση");
+        ButtonSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -144,27 +159,28 @@ public class ListUsersForm extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 767, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
+                            .addComponent(LabelUsers)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(ButtonEdit)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton1)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(ButtonDelete)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(ButtonNew)))))
-                        .addGap(0, 497, Short.MAX_VALUE)))
+                                .addComponent(ButtonDelete)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ButtonNew))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(ButtonCancel)
+                                .addGap(38, 38, 38)
+                                .addComponent(ButtonSave)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addComponent(jLabel1)
+                .addComponent(LabelUsers)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -172,9 +188,11 @@ public class ListUsersForm extends javax.swing.JInternalFrame {
                     .addComponent(ButtonEdit)
                     .addComponent(ButtonDelete)
                     .addComponent(ButtonNew))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(45, 45, 45))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ButtonSave)
+                    .addComponent(ButtonCancel))
+                .addContainerGap())
         );
 
         bindingGroup.bind();
@@ -308,14 +326,23 @@ public class ListUsersForm extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_ButtonNewActionPerformed
 
+    private void ButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonCancelActionPerformed
+
+    private void ButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSaveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonSaveActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButtonCancel;
     private javax.swing.JButton ButtonDelete;
     private javax.swing.JButton ButtonEdit;
     private javax.swing.JButton ButtonNew;
+    private javax.swing.JButton ButtonSave;
+    private javax.swing.JLabel LabelUsers;
     private javax.swing.JTable TableUsersList;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private java.util.List<AppUser> list1;
     private javax.persistence.Query query1;
