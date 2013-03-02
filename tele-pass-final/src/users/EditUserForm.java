@@ -191,20 +191,20 @@ public class EditUserForm extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        MyWindowEvent we = new MyWindowEvent(this, WindowEvent.WINDOW_CLOSED,true);
+        MyWindowEvent we = new MyWindowEvent(this, WindowEvent.WINDOW_CLOSED,false);
         for (WindowListener l : this.getWindowListeners()) {
             l.windowClosed(we);
        }
-       this.setVisible(false); 
+       this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         MyWindowEvent we = new MyWindowEvent(this, WindowEvent.WINDOW_CLOSED,false);
+         MyWindowEvent we = new MyWindowEvent(this, WindowEvent.WINDOW_CLOSED,true);
         for (WindowListener l : this.getWindowListeners()) {
             l.windowClosed(we);
        }
-       this.setVisible(false); 
+       this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
