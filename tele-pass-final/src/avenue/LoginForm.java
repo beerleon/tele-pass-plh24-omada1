@@ -148,7 +148,8 @@ public class LoginForm extends javax.swing.JFrame {
 
     private void ButtonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonOKActionPerformed
         // TODO add your handling code here:
-      query1 = em.createQuery("select u from AppUser u where u.userName=:userName and u.password=:password").setParameter("userName",TextBoxUsername.getText()).setParameter("password",TextBoxPassword.getText());
+
+        query1 = em.createQuery("select u from AppUser u where u.userName=:userName and u.password=:password").setParameter("userName",TextBoxUsername.getText()).setParameter("password",TextBoxPassword.getText());
         list1 =  query1.getResultList();
         if (list1.size()==1) {
             Session.loginUser = (AppUser)list1.get(0);

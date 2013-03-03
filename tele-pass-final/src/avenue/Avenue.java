@@ -19,7 +19,7 @@ import users.ListUsersForm;
 
 /**
  *
- * @author Denis...*/
+ * @author Denis*/
 
 public class Avenue extends javax.swing.JFrame {
      /**
@@ -44,7 +44,9 @@ public class Avenue extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
+        appUser1 = Session.loginUser;
         PanelFooter = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -69,7 +71,6 @@ public class Avenue extends javax.swing.JFrame {
         MenuItemTileCascade = new javax.swing.JMenuItem();
         MenuItemTileVertically = new javax.swing.JMenuItem();
         MenuItemTileHorizontally = new javax.swing.JMenuItem();
-        MenuItemTileGrid = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,6 +79,12 @@ public class Avenue extends javax.swing.JFrame {
         jLabel1.setText("Σταθμός: ");
 
         jLabel2.setText("Χρήστης: ");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, appUser1, org.jdesktop.beansbinding.ELProperty.create("${stationId.description}"), TextFieldStation, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, appUser1, org.jdesktop.beansbinding.ELProperty.create("${userName}"), TextFieldUsername, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
 
         javax.swing.GroupLayout PanelFooterLayout = new javax.swing.GroupLayout(PanelFooter);
         PanelFooter.setLayout(PanelFooterLayout);
@@ -216,15 +223,6 @@ public class Avenue extends javax.swing.JFrame {
         });
         jMenu2.add(MenuItemTileHorizontally);
 
-        MenuItemTileGrid.setLabel("Πλέγμα");
-        MenuItemTileGrid.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuItemTileGridActionPerformed(evt);
-            }
-        });
-        jMenu2.add(MenuItemTileGrid);
-        MenuItemTileGrid.getAccessibleContext().setAccessibleName("");
-
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -243,6 +241,8 @@ public class Avenue extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PanelFooter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -277,46 +277,31 @@ public class Avenue extends javax.swing.JFrame {
 
     private void MenuItemUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemUsersActionPerformed
         // TODO add your handling code here:
-        ListUsersForm formUserList = new ListUsersForm();
-        formUserList.setVisible(true);
-        desktop.add(formUserList);
-        try {
-            formUserList.setMaximum(true);  
-        }
-        catch(PropertyVetoException ex) {
-            String message;
-            message=ex.toString();
-              JOptionPane.showMessageDialog(this,  message,"Σφάλμα Μεγιστοποίησης",JOptionPane.ERROR_MESSAGE);       
-        }
-            
-      
-                         
+       ListUsersForm formUserList = new ListUsersForm();
+       Session.OpenChildForm(formUserList, desktop);              
     }//GEN-LAST:event_MenuItemUsersActionPerformed
 
     private void MenuItemRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemRolesActionPerformed
         // TODO add your handling code here:
         ListRolesForm formRoleList = new ListRolesForm();
-        formRoleList.setVisible(true);
-        desktop.add(formRoleList);
+        Session.OpenChildForm(formRoleList, desktop);
     }//GEN-LAST:event_MenuItemRolesActionPerformed
 
     private void MenuItemTollsPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemTollsPassActionPerformed
         // TODO add your handling code here:
-        CollectTollForm ctf = new CollectTollForm();
-        ctf.setVisible(true);
-        desktop.add(ctf);
+        CollectTollForm formCollectToll = new CollectTollForm();
+      Session.OpenChildForm(formCollectToll, desktop);
     }//GEN-LAST:event_MenuItemTollsPassActionPerformed
 
     private void MenuItemProgramsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemProgramsActionPerformed
         // TODO add your handling code here:
-        ListProgramForm lpf = new ListProgramForm();
-        lpf.setVisible(true);
-        desktop.add(lpf);
+        ListProgramForm formProgramList = new ListProgramForm();
+        Session.OpenChildForm(formProgramList, desktop);
     }//GEN-LAST:event_MenuItemProgramsActionPerformed
 
     //Χρήση τύπου Enumeration για στοίχιση των παραθύρων
      enum TileType {
-    TILE_HORIZONTAL, TILE_VERTICAL, TILE_CASCADE, TILE_SQUARE
+    TILE_CASCADE,TILE_VERTICAL,TILE_HORIZONTAL
    };
         
      private void arrangeCurrentWindow(TileType WindowLayout) {
@@ -326,11 +311,8 @@ public class Avenue extends javax.swing.JFrame {
          * xcFrame nothing else
          */
         final JInternalFrame[] frames = desktop.getAllFramesInLayer(JLayeredPane.DEFAULT_LAYER);
-
         final Dimension dim = desktop.getSize();
-      
-  
-        
+            
         switch (WindowLayout) {
             case TILE_HORIZONTAL: {
                 int vertSize = dim.height / frames.length;
@@ -355,36 +337,11 @@ public class Avenue extends javax.swing.JFrame {
                 }
                 break;
             }
-            case TILE_SQUARE: {
-                int hCount = frames.length / 2 + 1;
-                if (hCount >= 3) {
-                    hCount = 2;
-                }
-                int vCount = 1;
-                if (frames.length > 2) {
-                    vCount = 2;
-                }
-                int vertSize = dim.height / vCount;
-                int horizSize = dim.width / hCount;
-
-                for (int i = 0; i < vCount; i++) {
-                    for (int j = 0; j < hCount; j++) {
-                        if (i * 2 + j >= frames.length) {
-                            break;
-                        }
-                        JInternalFrame frame = frames[i * 2 + j];
-                        frame.setSize(new Dimension(horizSize, vertSize));
-                        frame.setLocation(j * horizSize, i * vertSize);
-                    }
-                }
-            }
         }
         desktop.validate();
-
     } 
-                        
-
-                 
+                    
+             
     
     private void MenuItemTileCascadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemTileCascadeActionPerformed
        arrangeCurrentWindow(TileType.TILE_CASCADE);
@@ -402,10 +359,6 @@ public class Avenue extends javax.swing.JFrame {
         arrangeCurrentWindow(TileType.TILE_VERTICAL);
     }//GEN-LAST:event_MenuItemTileVerticallyActionPerformed
 
-    private void MenuItemTileGridActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemTileGridActionPerformed
-        arrangeCurrentWindow(TileType.TILE_SQUARE);
-    }//GEN-LAST:event_MenuItemTileGridActionPerformed
-
     private void MenuItemTransactionsCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemTransactionsCardActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MenuItemTransactionsCardActionPerformed
@@ -414,10 +367,7 @@ public class Avenue extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_MenuItemTransactionsCustomerActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+      public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -451,7 +401,6 @@ public class Avenue extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuItemPrograms;
     private javax.swing.JMenuItem MenuItemRoles;
     private javax.swing.JMenuItem MenuItemTileCascade;
-    private javax.swing.JMenuItem MenuItemTileGrid;
     private javax.swing.JMenuItem MenuItemTileHorizontally;
     private javax.swing.JMenuItem MenuItemTileVertically;
     private javax.swing.JMenuItem MenuItemTollsPass;
@@ -462,6 +411,7 @@ public class Avenue extends javax.swing.JFrame {
     private javax.swing.JPanel PanelFooter;
     private javax.swing.JTextField TextFieldStation;
     private javax.swing.JTextField TextFieldUsername;
+    private model.AppUser appUser1;
     private javax.swing.JDesktopPane desktop;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -470,6 +420,7 @@ public class Avenue extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
       

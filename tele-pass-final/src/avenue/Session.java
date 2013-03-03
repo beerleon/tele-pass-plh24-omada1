@@ -4,6 +4,10 @@
  */
 package avenue;
 
+import java.beans.PropertyVetoException;
+import javax.swing.JDesktopPane;
+import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 import model.AppUser;
 import model.RolePermission;
 
@@ -46,6 +50,16 @@ public class Session {
         return ret;
     }
 
-    
+    public static void OpenChildForm(JInternalFrame window,JDesktopPane desktop){
+        window.setVisible(true);
+        desktop.add(window);
+        
+            try {
+            window.setMaximum(true);  
+        }
+        catch(PropertyVetoException ex) {
+           ex.toString();
+         }
+    }
     
 }

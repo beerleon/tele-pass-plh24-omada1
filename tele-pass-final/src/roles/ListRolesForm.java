@@ -4,21 +4,20 @@
  */
 package roles;
 
-import users.*;
 import avenue.MyWindowEvent;
-import avenue.Session;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.persistence.EntityManager;
 import javax.swing.JFrame;
 import model.DBManager;
 import model.UserRole;
+import users.*;
 
 /**
  *
  * @author Aggelos
  */
-public class ListRolesForm extends javax.swing.JFrame {
+public class ListRolesForm extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form ListUsersForm
@@ -131,7 +130,6 @@ public class ListRolesForm extends javax.swing.JFrame {
        EditRoleForm erf = new EditRoleForm(ur,false);
        
        erf.setVisible(true);
-       thisFrame=this;
        thisFrame.setEnabled(false);
        //************
         erf.addWindowListener(new WindowListener() {
