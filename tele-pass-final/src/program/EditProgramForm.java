@@ -6,6 +6,7 @@ import java.awt.event.WindowListener;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import model.DBManager;
 import model.Program;
 import model.ProgramRate;
@@ -37,6 +38,10 @@ public class EditProgramForm extends javax.swing.JFrame {
         }
         initComponents();
         //org.jdesktop.observablecollections.ObservableCollections.observableList(customerQuery.getResultList());
+        
+        //απενεργοποίηση του πεδίου όνομα στην μεταβολή...
+        if (readOnly) { TextFieldprogramName.setEditable(false); }
+        exitOnButton=false;
     }
 
     /**
@@ -60,16 +65,23 @@ public class EditProgramForm extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        ButtonCancel = new javax.swing.JButton();
+        ButtonSave = new javax.swing.JButton();
         programIdTextField = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        TextFieldprogramName = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
 
         stationBoxRenderer1.setText("stationBoxRenderer1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Σταθμός: ");
 
@@ -77,19 +89,19 @@ public class EditProgramForm extends javax.swing.JFrame {
 
         jLabel8.setText("Πρόγραμμα: ");
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel.gif"))); // NOI18N
-        jButton4.setText("Ακυρο");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        ButtonCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel.gif"))); // NOI18N
+        ButtonCancel.setText("Ακυρο");
+        ButtonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                ButtonCancelActionPerformed(evt);
             }
         });
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.gif"))); // NOI18N
-        jButton5.setText("Αποθήκευση");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        ButtonSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.gif"))); // NOI18N
+        ButtonSave.setText("Αποθήκευση");
+        ButtonSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                ButtonSaveActionPerformed(evt);
             }
         });
 
@@ -121,6 +133,11 @@ public class EditProgramForm extends javax.swing.JFrame {
         jTableBinding.bind();
         jScrollPane1.setViewportView(jTable1);
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, program2, org.jdesktop.beansbinding.ELProperty.create("${name}"), TextFieldprogramName, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        jLabel9.setText("Όνομα: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -128,31 +145,38 @@ public class EditProgramForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(programIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(110, 110, 110))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jSeparator1)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TextFieldprogramName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(programIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(110, 110, 110))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(7, 7, 7)
-                        .addComponent(jButton4)
+                        .addComponent(ButtonCancel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5))
+                        .addComponent(ButtonSave))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -164,16 +188,20 @@ public class EditProgramForm extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(programIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(TextFieldprogramName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton4))
+                    .addComponent(ButtonSave)
+                    .addComponent(ButtonCancel))
                 .addContainerGap())
         );
 
@@ -182,23 +210,28 @@ public class EditProgramForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void ButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelActionPerformed
         // TODO add your handling code here:
+        exitOnButton=true;
         MyWindowEvent we = new MyWindowEvent(this, WindowEvent.WINDOW_CLOSED,false);
         for (WindowListener l : this.getWindowListeners()) {
             l.windowClosed(we);
        }
        this.setVisible(false); 
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_ButtonCancelActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void ButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSaveActionPerformed
         // TODO add your handling code here:
+        exitOnButton=true;
+        if (!dataIsCorrect()) { //εάν δεν έχει συμπληρώσει σωστά τα στοιχεία να μην φύγει
+            return;
+        }
         MyWindowEvent we = new MyWindowEvent(this, WindowEvent.WINDOW_CLOSED,true);
         for (WindowListener l : this.getWindowListeners()) {
             l.windowClosed(we);
        }
        this.setVisible(false); 
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_ButtonSaveActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
@@ -216,6 +249,31 @@ public class EditProgramForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // Πιάνει το κλείσιμο της φόρμας από το Χ.
+        if (!exitOnButton) { 
+            ButtonCancel.doClick();
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    //Ελέγχει αν τα πεδία είναι σωστά
+    private boolean dataIsCorrect() {
+        boolean answer=true;
+        if (programIdTextField.getText().trim().length() == 0) {
+            answer=false;
+        }
+        if (TextFieldprogramName.getText().trim().length() == 0) {
+                answer=false;
+        }
+        if (answer==false) {
+            String message = "Δεν έχετε συμπληρώσει όλα τα απαιτούμενα στοιχεία";
+            JOptionPane.showMessageDialog(this, message);
+        }
+        return answer;
+    }
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -251,12 +309,14 @@ public class EditProgramForm extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton ButtonCancel;
+    private javax.swing.JButton ButtonSave;
+    private javax.swing.JTextField TextFieldprogramName;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
@@ -276,4 +336,5 @@ public class EditProgramForm extends javax.swing.JFrame {
     Station station1;
     JFrame thisFrame;
     boolean readOnly;
+    boolean exitOnButton;
 }
