@@ -21,7 +21,7 @@ import model.VehicleCategory;
  *
  * @author Aggelos
  */
-public class ListProgramForm extends javax.swing.JInternalFrame {
+public class ListProgramForm extends javax.swing.JFrame {
 
     /**
      * Creates new form ListProgramForm
@@ -202,6 +202,7 @@ public class ListProgramForm extends javax.swing.JInternalFrame {
        EditProgramForm epf = new EditProgramForm(p,false);
        
        epf.setVisible(true);
+       thisFrame=this;
        thisFrame.setEnabled(false);
        //************
         epf.addWindowListener(new WindowListener() {
@@ -288,6 +289,7 @@ public class ListProgramForm extends javax.swing.JInternalFrame {
        EditProgramForm ecf = new EditProgramForm(p,true);
        
        ecf.setVisible(true);
+       thisFrame=this;
        thisFrame.setEnabled(false);
        //************
         ecf.addWindowListener(new WindowListener() {
