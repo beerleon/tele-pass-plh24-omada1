@@ -24,33 +24,28 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author leon
  */
 @Entity
-@Table(name = "PROGRAM")
+@Table(name = "COLOR")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Program.findAll", query = "SELECT p FROM Program p"),
-    @NamedQuery(name = "Program.findById", query = "SELECT p FROM Program p WHERE p.id = :id"),
-    @NamedQuery(name = "Program.findByName", query = "SELECT p FROM Program p WHERE p.name = :name"),
-    @NamedQuery(name = "Program.findByDescription", query = "SELECT p FROM Program p WHERE p.description = :description")})
-public class Program implements Serializable {
+    @NamedQuery(name = "Color.findAll", query = "SELECT c FROM Color c"),
+    @NamedQuery(name = "Color.findById", query = "SELECT c FROM Color c WHERE c.id = :id"),
+    @NamedQuery(name = "Color.findByDescription", query = "SELECT c FROM Color c WHERE c.description = :description")})
+public class Color implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Column(name = "NAME")
-    private String name;
     @Column(name = "DESCRIPTION")
     private String description;
-    @OneToMany(mappedBy = "programId")
-    private List<ProgramRate> programRateList;
-    @OneToMany(mappedBy = "programId")
+    @OneToMany(mappedBy = "colorId")
     private List<Vehicle> vehicleList;
 
-    public Program() {
+    public Color() {
     }
 
-    public Program(Integer id) {
+    public Color(Integer id) {
         this.id = id;
     }
 
@@ -62,29 +57,12 @@ public class Program implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @XmlTransient
-    public List<ProgramRate> getProgramRateList() {
-        return programRateList;
-    }
-
-    public void setProgramRateList(List<ProgramRate> programRateList) {
-        this.programRateList = programRateList;
     }
 
     @XmlTransient
@@ -106,10 +84,10 @@ public class Program implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Program)) {
+        if (!(object instanceof Color)) {
             return false;
         }
-        Program other = (Program) object;
+        Color other = (Color) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -118,7 +96,7 @@ public class Program implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Program[ id=" + id + " ]";
+        return "model.Color[ id=" + id + " ]";
     }
     
 }
